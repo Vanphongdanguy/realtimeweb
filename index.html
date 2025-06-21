@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dữ liệu realtime</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      text-align: center;
+    }
+    .label {
+      font-size: 18px;
+      margin: 0;
+    }
+    .value {
+      font-size: 32px;
+      font-weight: bold;
+      color: #c62828;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <p class="label">Số đại biểu tham gia</p>
+      <div id="a2" class="value">...</div>
+    </div>
+    <div>
+      <p class="label">Tỉ lệ</p>
+      <div id="c2" class="value">...</div>
+    </div>
+  </div>
+
+  <script>
+    const sheetAPI = "https://script.google.com/macros/s/AKfycbwHnwQIbcWn-2hkFsq0EPi9igBvy-shFWMJYYL4CaEqbUvgqH72h2hW2YjfjJTJ_Xoj8A/exec"; // <== Thay bằng URL Web App của bạn
+
+    async function fetchData() {
+      try {
+        const response = await fetch(sheetAPI);
+        const data = await response.json();
+
+        document.getElementById("a2").innerText = data.a2_value;
+        document.getElementById("c2").innerText = data.c2_value;
+      } catch (error) {
+        console.error("Lỗi khi lấy dữ liệu:", error);
+      }
+    }
+
+    fetchData();
+    setInterval(fetchData, 3000);
+  </script>
+</body>
+</html>
