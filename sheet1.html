@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bảng dữ liệu Sheet1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f44336;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h2>Dữ liệu chi tiết từ Sheet1</h2>
+  <div id="table-container">Đang tải dữ liệu...</div>
+
+  <script>
+    const sheetAPI = "https://script.google.com/macros/s/AKfycbwHnwQIbcWn-2hkFsq0EPi9igBvy-shFWMJYYL4CaEqbUvgqH72h2hW2YjfjJTJ_Xoj8A/exec";
+
+    async function loadTable() {
+      try {
+        const response = await fetch(sheetAPI);
+        const data = await response.json();
+
+        let html = '<table><thead><tr>';
+        data.sheet1_data[0].forEach(col => html += `<th>${col}</th>`);
+        html += '</tr></thead><tbody>';
+
+        for (let i = 1; i < data.sheet1_data.length; i++) {
+          html += '<tr>';
+          data.sheet1_data[i].forEach(cell => html += `<td>${cell}</td>`);
+          html += '</tr>';
+        }
+
+        html += '</tbody></table>';
+        document.getElementById("table-container").innerHTML = html;
+      } catch (err) {
+        document.getElementById("table-container").innerText = "Không thể tải dữ liệu.";
+        console.error("Lỗi:", err);
+      }
+    }
+
+    loadTable();
+    setInterval(loadTable, 3000); // cập nhật mỗi 10 giây
+  </script>
+</body>
+</html>
