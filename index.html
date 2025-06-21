@@ -6,25 +6,26 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      padding: 40px;
       margin: 0;
     }
     .row {
       display: flex;
       justify-content: center;
-      gap: 80px;
+      gap: 100px;
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
     }
     .label {
-      font-size: 16px;
+      font-size: 22px;
       color: #000000;
-      margin-top: 5px;
+      margin-top: 15px;
     }
     .value {
-      font-size: 32px;
+      font-size: 50px;
       font-weight: bold;
       color: #c62828;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -54,7 +55,7 @@
         const data = await response.json();
 
         document.getElementById("a2").innerText = data.a2_value;
-        
+
         const c2Value = parseFloat(data.c2_value);
         const c2Formatted = isNaN(c2Value) ? "..." : `${(c2Value * 100).toFixed(2)}%`;
         document.getElementById("c2").innerText = c2Formatted;
