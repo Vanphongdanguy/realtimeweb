@@ -45,7 +45,27 @@
 
         for (let i = 1; i < data.sheet1_data.length; i++) {
           html += '<tr>';
-          data.sheet1_data[i].forEach(cell => html += `<td>${cell}</td>`);
+            data.sheet1_data[i].forEach((cell, j) => {
+            // Nếu là cột cuối cùng và là kiểu ngày → định dạng
+            if (j === data.sheet1_data[0].length - 1 && cell !== "" && typeof cell === "string") {
+              const date = new Date(cell);
+            if (!isNaN(date)) {
+              const formatted = date.toLocaleString("vi-VN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              });
+              html += `<td>${formatted}</td>`;
+            } else {
+            html += `<td>${cell}</td>`;
+            }
+            } else {
+            html += `<td>${cell}</td>`;
+          }
+          });
           html += '</tr>';
         }
 
