@@ -2,52 +2,57 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Dữ liệu realtime</title>
+  <title>Hiển thị A2 và C2</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 10px;
+      padding: 10px 10px; /* 🔽 GIẢM lề trên và dưới, giữ hai bên thoáng */
       margin: 0;
     }
+
     .row {
       display: flex;
       justify-content: center;
-      gap: 120px;
+      gap: 140px; /* 🔼 TĂNG khoảng cách giữa các cột A2 – 150 – C2 */
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 10px; /* 🔽 GIẢM khoảng cách dưới toàn khối */
     }
-    .label {
-      font-size: 23px;
-      color: #000000;
-      margin-top: 15px;
-    }
-    .value {
-      font-size: 40px;
+
+    .cell .value {
+      font-size: 40px;         /* 🔼 CỠ CHỮ lớn cho giá trị */
       font-weight: bold;
-      color: #c62828;
-      line-height: 1.4;
+      color: #c62828;          /* 🔴 MÀU ĐỎ nổi bật */
+      line-height: 1.1;        /* 🔽 GIẢM khoảng cách dòng giữa value và label */
+      margin-bottom: 5px;      /* 🔽 Khoảng cách nhỏ giữa giá trị và nhãn */
+    }
+
+    .cell .label {
+      font-size: 23px;         /* CỠ CHỮ nhãn rõ ràng nhưng nhỏ hơn giá trị */
+      color: #000000;
+      margin-top: 0;
     }
   </style>
 </head>
 <body>
-  <!-- Dòng giá trị -->
+
+  <!-- ✅ Khối hiển thị giá trị A2, 150 (cứng), C2 -->
   <div class="row">
-    <div>
+    <div class="cell">
       <div class="value" id="a2">...</div>
       <div class="label">Đại biểu có mặt</div>
     </div>
-    <div>
-      <div class="value">150</div>
+    <div class="cell">
+      <div class="value">150</div> <!-- 👈 Hiển thị cố định -->
       <div class="label">Tổng số đại biểu</div>
     </div>
-    <div>
+    <div class="cell">
       <div class="value" id="c2">...</div>
       <div class="label">Tỉ lệ tham dự</div>
     </div>
   </div>
 
   <script>
-    const sheetAPI = "https://script.google.com/macros/s/AKfycbz_yTK3yE9vc-0Ptb-eim8oEvua4hq3SFhIagLLahIgLaCKKdU1DEOR6w0S4zajekg7Zg/exec";
+    const sheetAPI = "https://script.google.com/macros/s/AKfycbybw6K9CyHaaL-Ym1Ef4BVsoxzSVZw2L6bgUOXyZdNg1nnibP3CqcxgDQiCYxQZeABggg/exec";
 
     async function fetchData() {
       try {
