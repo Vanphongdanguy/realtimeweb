@@ -6,41 +6,43 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 40px;
+      padding: 20px 40px; /* giảm lề trên và dưới */
       margin: 0;
     }
     .row {
       display: flex;
       justify-content: center;
-      gap: 100px;
+      gap: 160px; /* tăng khoảng cách giữa các cột */
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
-    .label {
-      font-size: 22px;
-      color: #000000;
-      margin-top: 15px;
-    }
-    .value {
+    .cell .value {
       font-size: 50px;
       font-weight: bold;
       color: #c62828;
-      line-height: 1.4;
+      line-height: 1.1; /* giảm khoảng cách dòng */
+      margin-bottom: 5px;
+    }
+    .cell .label {
+      font-size: 22px;
+      color: #000000;
+      margin-top: 0;
     }
   </style>
 </head>
 <body>
-  <!-- Dòng giá trị -->
+
+  <!-- Phần hiển thị A2, 150, C2 -->
   <div class="row">
-    <div>
+    <div class="cell">
       <div class="value" id="a2">...</div>
       <div class="label">Đại biểu có mặt</div>
     </div>
-    <div>
+    <div class="cell">
       <div class="value">150</div>
       <div class="label">Tổng số đại biểu</div>
     </div>
-    <div>
+    <div class="cell">
       <div class="value" id="c2">...</div>
       <div class="label">Tỉ lệ tham dự</div>
     </div>
