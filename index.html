@@ -6,50 +6,48 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 10px 10px; /* giảm lề trên và dưới */
+      padding: 10px;
       margin: 0;
     }
     .row {
       display: flex;
       justify-content: center;
-      gap: 140px; /* tăng khoảng cách giữa các cột */
+      gap: 120px;
       text-align: center;
       margin-bottom: 10px;
     }
-    .cell .value {
+    .label {
+      font-size: 23px;
+      color: #000000;
+      margin-top: 15px;
+    }
+    .value {
       font-size: 40px;
       font-weight: bold;
       color: #c62828;
-      line-height: 1.1; /* giảm khoảng cách dòng */
-      margin-bottom: 5px;
-    }
-    .cell .label {
-      font-size: 25px;
-      color: #000000;
-      margin-top: 0;
+      line-height: 1.4;
     }
   </style>
 </head>
 <body>
-
-  <!-- Phần hiển thị A2, 150, C2 -->
+  <!-- Dòng giá trị -->
   <div class="row">
-    <div class="cell">
+    <div>
       <div class="value" id="a2">...</div>
       <div class="label">Đại biểu có mặt</div>
     </div>
-    <div class="cell">
+    <div>
       <div class="value">150</div>
       <div class="label">Tổng số đại biểu</div>
     </div>
-    <div class="cell">
+    <div>
       <div class="value" id="c2">...</div>
       <div class="label">Tỉ lệ tham dự</div>
     </div>
   </div>
 
   <script>
-    const sheetAPI = "https://script.google.com/macros/s/AKfycbybw6K9CyHaaL-Ym1Ef4BVsoxzSVZw2L6bgUOXyZdNg1nnibP3CqcxgDQiCYxQZeABggg/exec";
+    const sheetAPI = "https://script.google.com/macros/s/AKfycbz_yTK3yE9vc-0Ptb-eim8oEvua4hq3SFhIagLLahIgLaCKKdU1DEOR6w0S4zajekg7Zg/exec";
 
     async function fetchData() {
       try {
@@ -59,7 +57,16 @@
         document.getElementById("a2").innerText = data.a2_value;
 
         const c2Value = parseFloat(data.c2_value);
-        const c2Formatted = isNaN(c2Value) ? "..." : `${(c2Value5000);
+        const c2Formatted = isNaN(c2Value) ? "..." : `${(c2Value * 100).toFixed(2)}%`;
+        document.getElementById("c2").innerText = c2Formatted;
+
+      } catch (error) {
+        console.error("Lỗi khi lấy dữ liệu:", error);
+      }
+    }
+
+    fetchData();
+    setInterval(fetchData, 3000);
   </script>
 </body>
 </html>
